@@ -21,3 +21,5 @@ function log(tag: string) {
 export const logInfo = log(colors.bold(colors.cyan('[vite:mock]')));
 
 export const logError = log(colors.bold(colors.red('[vite:mock]')));
+
+export const isFunction = (val: any): val is Function => typeof val === 'function';

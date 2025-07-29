@@ -1,9 +1,8 @@
+import type { IncomingMessage, ServerResponse } from 'node:http';
+
 export interface MockPluginOptions {
   enable?: boolean;
   mockPath?: string;
 }
 
-export interface MockResponse {
-  method: number;
-  response: any;
-}
+export type MockResponse = Record<string, any> | ((req: IncomingMessage, res: ServerResponse) => void);

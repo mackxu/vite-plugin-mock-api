@@ -6,13 +6,13 @@ defineProps<{ msg: string }>();
 const count = ref(0);
 
 const handleClick = async () => {
-  const res = await fetch('/api/shop');
+  const res = await fetch('/api/user');
   console.log(await res.json());
 
   const res2 = await fetch('/api/login', {
     method: 'POST',
   });
-  console.log(await res2.json());
+  console.log(await res2.text());
 };
 </script>
 

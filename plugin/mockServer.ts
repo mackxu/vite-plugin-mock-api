@@ -1,6 +1,6 @@
 import { type NextHandleFunction } from 'connect';
 import type { MockPluginOptions, MockResponse } from './types';
-import { isAbsPath, logInfo } from './utils';
+import { isAbsPath, isFunction, logInfo } from './utils';
 import path from 'node:path';
 import fg from 'fast-glob';
 import { bundleRequire } from 'bundle-require';
@@ -64,6 +64,10 @@ export function getMockMiddleware(options: Required<MockPluginOptions>): NextHan
     const path = `${req.method} ${req.url}`;
 
     const resp = map[path] || map[req.url!];
+    if (isFunction(resp)) {
+      resp(req, res);
+      return;
+    }
     if (resp) {
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify(resp));
