@@ -1,6 +1,6 @@
-import { type Plugin } from 'vite';
+import { type Plugin, type ResolvedConfig } from 'vite';
 import type { MockPluginOptions } from './types';
-import { getMockMiddleware, mockServer } from './mockServer';
+import { closeWatcher, getMockMiddleware, mockServer } from './mockServer';
 
 export const viteMockPlugin = (options: MockPluginOptions = {}): Plugin => {
   const opt = {
@@ -8,20 +8,27 @@ export const viteMockPlugin = (options: MockPluginOptions = {}): Plugin => {
     mockPath: 'mock',
     ...options,
   };
+  let configResolved: ResolvedConfig;
   return {
     name: 'vite-mock-plugin',
     enforce: 'pre',
-    configResolved: (configResolved) => {
-      const isDev = configResolved.command === 'serve';
-      if (isDev) {
-        mockServer(opt);
-      }
+    configResolved: (resolvedConfig) => {
+      configResolved = resolvedConfig;
     },
     configureServer: (server) => {
       if (!opt.enable) {
         return;
       }
       server.middlewares.use(getMockMiddleware(opt));
+    },
+    buildStart: () => {
+      const isDev = configResolved.command === 'serve';
+      if (isDev && opt.enable) {
+        mockServer(opt);
+      }
+    },
+    buildEnd: () => {
+      closeWatcher();
     },
   };
 };

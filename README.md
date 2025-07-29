@@ -12,7 +12,7 @@ pnpm add vite-plugin-api-data-mock -D
 
 ## 插件配置
 
-```ts
+```js
 import { defineConfig } from 'vite';
 import { viteMockPlugin } from 'vite-plugin-api-data-mock';
 
@@ -33,7 +33,7 @@ export default defineConfig({
 
 ## mock 示例
 
-```ts
+```js
 // ./mock/users.ts
 export default {
   '/api/list': [
@@ -72,4 +72,21 @@ export default {
 
 ### picocolors
 
-- 我们使用 `picocolors` 来为日志添加颜色。
+使用 `picocolors` 来为日志添加颜色。
+
+### bundle-require
+
+loads the config file regardless what module format it is.
+
+Bundle your file with **esbuild**
+
+### chokidar
+
+```js
+const watcher = chokidar.watch('file, dir, or array', {
+  ignored: (path, stats) => stats?.isFile() && !path.endsWith('.js'), // only watch js files
+  persistent: true,
+});
+
+await watcher.close().then(() => console.log('closed'));
+```
