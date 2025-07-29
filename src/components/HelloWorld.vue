@@ -6,7 +6,7 @@ defineProps<{ msg: string }>();
 const count = ref(0);
 
 const handleClick = async () => {
-  const res = await fetch('/api/user');
+  const res = await fetch('/api/user?name=ck');
   console.log(await res.json());
 
   const res2 = await fetch('/api/login', {

@@ -61,9 +61,9 @@ function getMockDir(mockPath: string) {
 
 export function getMockMiddleware(options: Required<MockPluginOptions>): NextHandleFunction {
   return (req, res, next) => {
-    const path = `${req.method} ${req.url}`;
+    const reqUrl = new URL(req.url!, `http://${req.headers.host}`).pathname;
 
-    const resp = map[path] || map[req.url!];
+    const resp = map[`${req.method} ${reqUrl}`] || map[reqUrl];
     if (isFunction(resp)) {
       resp(req, res);
       return;
