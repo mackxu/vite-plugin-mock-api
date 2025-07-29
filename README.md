@@ -1,13 +1,13 @@
-# vite-plugin-mock-api
+# vite-plugin-api-data-mock
 
 vite 插件，用于 mock api
 
 ## 安装
 
 ```bash
-npm install vite-plugin-mock-api -D
-yarn add vite-plugin-mock-api -D
-pnpm add vite-plugin-mock-api -D
+npm install vite-plugin-api-data-mock -D
+yarn add vite-plugin-api-data-mock -D
+pnpm add vite-plugin-api-data-mock -D
 ```
 
 ## 插件配置
