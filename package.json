@@ -33,8 +33,7 @@
     "connect": "^3.7.0",
     "fast-glob": "^3.3.3",
     "path-to-regexp": "^8.2.0",
-    "picocolors": "^1.1.1",
-    "vue": "^3.5.17"
+    "picocolors": "^1.1.1"
   },
   "devDependencies": {
     "@types/connect": "^3.4.38",
@@ -45,6 +44,7 @@
     "tsup": "^8.5.0",
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
+    "vue": "^3.5.18",
     "vue-tsc": "^2.2.12"
   }
 }
