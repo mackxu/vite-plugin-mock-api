@@ -14,7 +14,7 @@ pnpm add vite-plugin-api-data-mock -D
 
 ```ts
 import { defineConfig } from 'vite';
-import mockApi from 'vite-plugin-mock-api';
+import mockApi from 'vite-plugin-api-data-mock';
 
 export default defineConfig({
   plugins: [
