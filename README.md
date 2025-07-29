@@ -6,6 +6,51 @@ vite 插件，用于 mock api
 
 ```bash
 npm install vite-plugin-mock-api -D
+yarn add vite-plugin-mock-api -D
+pnpm add vite-plugin-mock-api -D
+```
+
+## 插件配置
+
+```ts
+import { defineConfig } from 'vite';
+import mockApi from 'vite-plugin-mock-api';
+
+export default defineConfig({
+  plugins: [
+    mockApi({
+      mockPath: 'mock',
+      enable: true,
+    }),
+  ],
+});
+```
+
+**默认值**:
+
+- `mockPath`: `mock`
+- `enable`: `true`
+
+## mock 示例
+
+```ts
+// ./mock/users.ts
+export default {
+  '/api/list': [
+    {
+      id: 1,
+      name: 'David',
+    },
+  ],
+  'GET /api/user': {
+    id: 1,
+    name: 'david',
+  },
+  'POST /api/login': (req, res) => {
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('post user');
+  },
+};
 ```
 
 ## 插件开发
@@ -13,7 +58,7 @@ npm install vite-plugin-mock-api -D
 - 开发环境测试 ./plugin
 - 生产环境测试 ./dist
 
-## tsup 插件打包
+### tsup 插件打包
 
 - **`tsup.config.ts`**: 指定了入口文件、输出格式、外部依赖以及要使用的 `tsconfig`。
 
@@ -25,6 +70,6 @@ npm install vite-plugin-mock-api -D
 
 - **调试打包问题**: 指定正确的 `tsconfig.node.json` 解决了类型声明文件生成失败的问题。
 
-## picocolors
+### picocolors
 
 - 我们使用 `picocolors` 来为日志添加颜色。
